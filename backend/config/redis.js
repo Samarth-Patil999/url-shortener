@@ -1,9 +1,10 @@
 const Redis = require('ioredis');
 
+
 const redis = new Redis({
   host: process.env.REDIS_HOST || 'localhost',
   port: process.env.REDIS_PORT || 6379,
-  // WHY lazyConnect: don't crash on startup if Redis is temporarily down
+  password: process.env.REDIS_PASSWORD || undefined,
   lazyConnect: true,
   retryStrategy: (times) => Math.min(times * 50, 2000),
 });
